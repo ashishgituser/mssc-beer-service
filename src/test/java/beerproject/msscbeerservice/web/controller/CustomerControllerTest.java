@@ -65,12 +65,4 @@ class CustomerControllerTest {
                         .content(customerJson))
                 .andExpect(status().isCreated());
     }
-
-    @Test
-    void handleUpdate() {
-    }
-
-    @Test
-    void deleteById() {
-    }
 }
