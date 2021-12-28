@@ -1,6 +1,7 @@
 package beerproject.msscbeerservice.web.controller;
 
 import beerproject.msscbeerservice.web.model.BeerDto;
+import beerproject.msscbeerservice.web.model.BeerStyleEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,11 @@ class BeerControllerTest {
     @Test
     void saveNewBeer() throws Exception {
         BeerDto beerDto = BeerDto.builder()
-                .id(UUID.randomUUID())
+                .id(null)
                 .beerName("new Beer")
+                .beerStyle(BeerStyleEnum.ALE)
                 .upc(20L)
+                .price(new BigDecimal(20))
                 .build();
 
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
@@ -47,7 +50,13 @@ class BeerControllerTest {
 
     @Test
     void updateBeerById() throws Exception {
-        BeerDto beerDto = BeerDto.builder().build();
+        BeerDto beerDto = BeerDto.builder()
+                .id(null)
+                .beerName("new Beer")
+                .beerStyle(BeerStyleEnum.ALE)
+                .upc(20L)
+                .price(new BigDecimal(20))
+                .build();
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
         mockMvc.perform(put("/api/v1/beer/" + UUID.randomUUID())
